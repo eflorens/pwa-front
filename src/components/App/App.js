@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+import Toolbar from "../Toolbar/Toolbar";
+import Login from "../Login/Login"
 
 function App() {
     return (
         <div className="App">
-            <h1>Photobox</h1>
+            <Toolbar/>
+            <Login/>
         </div>
     );
 }
