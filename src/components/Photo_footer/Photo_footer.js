@@ -1,10 +1,18 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap"
 
-const PhotoFooter = ({likeNumber}) => {
+const PhotoFooter = ({photoId, likeNumber}) => {
+    const URL_LIKE_PHOTO = "/" + photoId
 
-    const likePhoto = () => {
-        
+    const likePhoto = async () => {
+        console.log(photoId)
+        const response = await fetch(URL_LIKE_PHOTO, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer <token>'
+            }
+        })
     }
 
     return (
