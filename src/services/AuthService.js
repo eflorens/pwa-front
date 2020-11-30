@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://pwa-back.herokuapp.com/";
+const API_URL = "https://pwa-back.herokuapp.com";
 
 /**
  * @param username
