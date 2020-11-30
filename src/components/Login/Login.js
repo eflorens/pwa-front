@@ -24,9 +24,7 @@ const Login = () => {
         event.preventDefault();
 
         const {email, password} = state
-        let res = auth.login(email, password);
-
-        console.log(res)
+        auth.authLogin(email, password);
     }
 
     return (

@@ -8,7 +8,7 @@ const API_URL = "https://pwa-back.herokuapp.com";
  * @param password
  */
 const register = (username, email, password) => {
-    return axios.post(`${API_URL}/register`, {
+    return axios.post(`${API_URL}/auth/register`, {
         username: username,
         email: email,
         password: password
@@ -20,7 +20,7 @@ const register = (username, email, password) => {
  * @param password
  */
 const login = (email, password) => {
-    return axios.post(`${API_URL}/login`, {
+    return axios.post(`${API_URL}/auth/login`, {
         email: email,
         password: password
     })

@@ -15,10 +15,8 @@ const AuthProvider = ({children}) => {
         isAuthenticated: false,
     });
 
-    const login = (email, password) => {
-        AuthService.login(email, password).then(res => {
-            console.log(res);
-
+    const authLogin = (email, password) => {
+        return AuthService.login(email, password).then(res => {
             const { userId, token } = res.data;
             localStorage.setItem("userId", userId)
             localStorage.setItem("token", token)
@@ -30,17 +28,19 @@ const AuthProvider = ({children}) => {
             })
 
             return res;
-        })
+        }).catch(err => {
+            console.log(err)
+        });
     }
 
-    const register = (username, email, password) => {
+    const authRegister = (username, email, password) => {
         AuthService.register(email, password).then(res => {
             console.log(res);
             return res;
         })
     }
 
-    const logout = () => {
+    const authLogout = () => {
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
 
@@ -54,7 +54,7 @@ const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={{
             ...authState,
-            login
+            authLogin
         }}>
             {children}
         </AuthContext.Provider>
