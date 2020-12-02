@@ -31,12 +31,7 @@ const Register = () => {
             })
             .catch(error => {
                 let errorStatus = error.response.status;
-                if (errorStatus === 401) {
-                    setError("Invalid credentials.")
-                }
-                if (errorStatus === 500) {
-                    setError("Internal server error.")
-                }
+                setError("Internal server error.")
                 setShow(true)
             })
         ;
