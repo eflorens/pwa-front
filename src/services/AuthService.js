@@ -11,7 +11,8 @@ const register = (username, email, password) => {
     return axios.post(`${API_URL}/auth/signup`, {
         username: username,
         email: email,
-        password: password
+        password: password,
+        password_confirmation: password,
     })
 };
 
