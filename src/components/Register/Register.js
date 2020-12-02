@@ -2,12 +2,14 @@ import React, {useState} from "react";
 import {Alert, Button, Card, Form} from "react-bootstrap"
 import AuthService from "../../services/AuthService";
 import {Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
 
+    const history = useHistory();
     const [show, setShow] = useState(false);
     const [error, setError] = useState(null);
-    const [state, setState] = useState({email: '', password: ''});
+    const [state, setState] = useState({username: '', email: '', password: ''});
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -21,12 +23,11 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const {email, password} = state
-        AuthService.login(email, password)
+        const {username, email, password} = state
+        AuthService.register(username, email, password)
             .then(response => {
-                const {userId, token} = response.data;
-                localStorage.setItem("userId", userId)
-                localStorage.setItem("token", token)
+                // TODO: Redirect to login
+                console.log(response);
             })
             .catch(error => {
                 let errorStatus = error.response.status;
@@ -57,8 +58,13 @@ const Login = () => {
             {alertDialog}
             <Card className="col-sm-12 col-md-8 mt-4 ml-auto mr-auto">
                 <Card.Body>
-                    <h2 className="text-center">Log In</h2>
+                    <h2 className="text-center">Register</h2>
                     <Form onSubmit={handleSubmit}>
+                        <Form.Group id="username">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" name="username" value={state.username} onChange={handleChange}
+                                          required/>
+                        </Form.Group>
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" name="email" value={state.email} onChange={handleChange}
@@ -70,14 +76,14 @@ const Login = () => {
                                           required/>
                         </Form.Group>
                         <Button type="submit" className="w-100 mt-2">
-                            Log In
+                            Register
                         </Button>
                     </Form>
-                    <Link to="/register">No account ? Create one.</Link>
+                    <Link to="/login">Back to login.</Link>
                 </Card.Body>
             </Card>
         </div>
     );
 }
 
-export default Login;
+export default Register;
