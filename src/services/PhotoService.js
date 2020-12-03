@@ -26,3 +26,9 @@ const postNewPhoto = async () => {
     else
         return null;
 }
+
+export default {
+    postNewPhoto,
+    getPhotosList,
+    getUserPhotosList
+}

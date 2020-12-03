@@ -3,6 +3,7 @@ import Toolbar from "../Toolbar/Toolbar";
 import Login from "../Login/Login"
 import Container from "react-bootstrap/Container";
 import Profil from "../Profile/Profile"
+import UploadPhotoComponant from '../Photo/Upload_photo/UploadPhoto';
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Login/>
             </Container>
             <Profil/>
+            <UploadPhotoComponant/>
         </>
     );
 }
