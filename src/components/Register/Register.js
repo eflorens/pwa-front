@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import {Alert, Button, Card, Form} from "react-bootstrap"
-import AuthService from "../../services/AuthService";
 import {Link} from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import {useAuth} from "../../contexts/AuthContext";
 
 const Register = () => {
 
-    const history = useHistory();
+    const auth = useAuth();
     const [show, setShow] = useState(false);
     const [error, setError] = useState(null);
     const [state, setState] = useState({username: '', email: '', password: ''});
@@ -23,18 +22,8 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const {username, email, password} = state
-        AuthService.register(username, email, password)
-            .then(response => {
-                // TODO: Redirect to login
-                console.log(response);
-            })
-            .catch(error => {
-                let errorStatus = error.response.status;
-                setError("Internal server error.")
-                setShow(true)
-            })
-        ;
+        const {username, email, password} = state;
+        auth.authRegister(username, email, password).then(res => console.log(res))
     }
 
     let alertDialog = null;
