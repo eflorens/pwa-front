@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../assets/logo.svg'
+import Nav from "react-bootstrap/Nav"
 
 const toolbar = (props) => (
     <Navbar bg="light">
@@ -14,6 +15,10 @@ const toolbar = (props) => (
             /> {' '}
             Photobox
         </Navbar.Brand>
+        <Nav className="mr-auto">
+            <Nav.Link href="#home">Profile</Nav.Link>
+            <Nav.Link href="#addPhoto">Add photo</Nav.Link>
+        </Nav>
     </Navbar>
 );
 
