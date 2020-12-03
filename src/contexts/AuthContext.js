@@ -15,8 +15,8 @@ const AuthProvider = ({children}) => {
         isAuthenticated: false,
     });
 
-    const authLogin = (email, password) => {
-        return AuthService.login(email, password).then(res => {
+    const authLogin = async (email, password) => {
+        return await AuthService.login(email, password).then(res => {
             const { userId, token } = res.data;
             localStorage.setItem("userId", userId)
             localStorage.setItem("token", token)
@@ -27,16 +27,17 @@ const AuthProvider = ({children}) => {
                 isAuthenticated: true,
             })
 
-            return res;
+             return res;
         }).catch(err => {
-            console.log(err)
+            return err;
         });
     }
 
-    const authRegister = (username, email, password) => {
-        AuthService.register(email, password).then(res => {
-            console.log(res);
+    const authRegister = async (username, email, password) => {
+        return await AuthService.register(username, email, password).then(res => {
             return res;
+        }).catch(err => {
+            return err;
         })
     }
 
@@ -51,10 +52,12 @@ const AuthProvider = ({children}) => {
         });
 
     }
+
     return (
         <AuthContext.Provider value={{
             ...authState,
-            authLogin
+            authLogin,
+            authRegister
         }}>
             {children}
         </AuthContext.Provider>
