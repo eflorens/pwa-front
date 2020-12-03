@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Alert, Button, Card, Form} from "react-bootstrap"
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 
 const Login = () => {
 
     const auth = useAuth();
+    const history = useHistory();
+
     const [show, setShow] = useState(false);
     const [error, setError] = useState(null);
     const [state, setState] = useState({email: '', password: ''});
@@ -23,7 +25,18 @@ const Login = () => {
         event.preventDefault();
 
         const {email, password} = state
-        auth.authLogin(email, password).then(res => console.log(res));
+        auth.authLogin(email, password).then(res => {
+            const status = res.status;
+            switch (status) {
+                case 200:
+                    history.push("/home");
+                    break;
+                default:
+                    setError("Internal server error, could't login.")
+                    setShow(true)
+                    break;
+            }
+        });
     }
 
     let alertDialog = null;
@@ -31,7 +44,7 @@ const Login = () => {
         alertDialog = (
             <Alert variant="danger" className="col-sm-12 col-md-8 mt-4 ml-auto mr-auto" onClose={() => setShow(false)}
                    dismissible>
-                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                <Alert.Heading>Something when wrong!</Alert.Heading>
                 <p>{error}</p>
             </Alert>
         );

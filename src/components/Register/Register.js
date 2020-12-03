@@ -8,6 +8,7 @@ const Register = () => {
 
     const auth = useAuth();
     let history = useHistory();
+
     const {register, handleSubmit, errors} = useForm();
     const [state, setState] = useState({message: '', status: ''})
 
@@ -23,8 +24,9 @@ const Register = () => {
                 switch (status) {
                     case 201:
                         setState({
-                            message: 'Your account was created successfully',
-                            status: 'success'})
+                            message: "Your account was created successfully",
+                            status: "success"
+                        })
 
                         setTimeout(() => {
                             history.push("/login")
@@ -32,8 +34,8 @@ const Register = () => {
                         break;
                     default:
                         setState({
-                            message: 'Internal server error, your account couldn\'t be created',
-                            status: 'danger'
+                            message: "Internal server error, your account couldn't be created",
+                            status: "danger"
                         })
                         break;
                 }
