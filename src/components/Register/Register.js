@@ -1,13 +1,16 @@
-import React from "react";
-import {Button, Card, Form} from "react-bootstrap"
+import React, {useState} from "react";
+import {Alert, Button, Card, Form} from "react-bootstrap"
 import {Link} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 import {useForm} from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
 
     const auth = useAuth();
+    let history = useHistory();
     const {register, handleSubmit, errors} = useForm();
+    const [state, setState] = useState({message: '', status: ''})
 
     /**
      * Launch register request when form data is valid.
@@ -17,7 +20,19 @@ const Register = () => {
         const {username, email, password} = data;
         auth.authRegister(username, email, password).then(
             res => {
-                console.log(res)
+                const status = res.status;
+                switch (status) {
+                    case 201:
+                        setState({message: 'Your account was created successfully', status: 'success'})
+                        break;
+                    default:
+                        setState({message: 'Internal server error, your account couldn\'t be created', status: 'danger'})
+                        break;
+                }
+
+                setTimeout(() => {
+                    history.push("/login")
+                }, 3000)
             }
         )
     }
@@ -31,8 +46,18 @@ const Register = () => {
         return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value)
     }
 
+    let alert = null;
+    if (state.message !== '') {
+        alert = (
+            <Alert className="col-sm-12 col-md-8 mt-4 ml-auto mr-auto" variant={state.status}>
+                {state.message}
+            </Alert>
+        )
+    }
+
     return (
         <div>
+            {alert}
             <Card className="col-sm-12 col-md-8 mt-4 ml-auto mr-auto">
                 <Card.Body>
                     <h2 className="text-center">Register</h2>
