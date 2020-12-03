@@ -29,13 +29,15 @@ const AuthProvider = ({children}) => {
 
              return res;
         }).catch(err => {
-            console.log(err)
+            return err;
         });
     }
 
     const authRegister = async (username, email, password) => {
         return await AuthService.register(username, email, password).then(res => {
             return res;
+        }).catch(err => {
+            return err;
         })
     }
 

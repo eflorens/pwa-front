@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import {Alert, Button, Card, Form} from "react-bootstrap"
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 import {useForm} from "react-hook-form";
-import { useHistory } from "react-router-dom";
 
 const Register = () => {
 
@@ -23,16 +22,21 @@ const Register = () => {
                 const status = res.status;
                 switch (status) {
                     case 201:
-                        setState({message: 'Your account was created successfully', status: 'success'})
+                        setState({
+                            message: 'Your account was created successfully',
+                            status: 'success'})
+
+                        setTimeout(() => {
+                            history.push("/login")
+                        }, 3000)
                         break;
                     default:
-                        setState({message: 'Internal server error, your account couldn\'t be created', status: 'danger'})
+                        setState({
+                            message: 'Internal server error, your account couldn\'t be created',
+                            status: 'danger'
+                        })
                         break;
                 }
-
-                setTimeout(() => {
-                    history.push("/login")
-                }, 3000)
             }
         )
     }
