@@ -17,7 +17,7 @@ const toolbar = (props) => (
         </Navbar.Brand>
         <Nav className="mr-auto">
             <Nav.Link href="#home">Profile</Nav.Link>
-            <Nav.Link href="#addPhoto">Add photo</Nav.Link>
+            <Nav.Link to="" href="#addPhoto">Add photo</Nav.Link>
         </Nav>
     </Navbar>
 );
