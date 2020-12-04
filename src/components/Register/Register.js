@@ -27,8 +27,8 @@ const Register = () => {
                             message: "Your account was created successfully",
                             status: "success"
                         })
-
                         setTimeout(() => {
+                            history.clear();
                             history.push("/login")
                         }, 3000)
                         break;

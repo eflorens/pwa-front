@@ -29,10 +29,11 @@ const Login = () => {
             const status = res.status;
             switch (status) {
                 case 200:
+                    history.clear();
                     history.push("/home");
                     break;
                 default:
-                    setError("Internal server error, could't login.")
+                    setError("Internal server error, couldn't login.")
                     setShow(true)
                     break;
             }
