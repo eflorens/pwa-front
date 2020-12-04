@@ -11,7 +11,6 @@ const UploadPhotoComponant = () => {
       const _handleSubmit = async (e) => {
         e.preventDefault();
         // TODO: do something with -> this.state.file
-        console.log('handle uploading-', file);
         const token = localStorage.getItem('token')
         var formData = new FormData();
         formData.append("image", file);
@@ -19,7 +18,6 @@ const UploadPhotoComponant = () => {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
       };
         const data = await axios.post(`${API_URL}/img`, formData, config)
-        console.log(data)
       }
     
       const _handleImageChange = (e) => {
