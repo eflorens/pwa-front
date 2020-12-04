@@ -10,14 +10,16 @@ const UploadPhotoComponant = () => {
     
       const _handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: do something with -> this.state.file
         const token = localStorage.getItem('token')
         var formData = new FormData();
         formData.append("image", file);
         const config = {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
       };
-        const data = await axios.post(`${API_URL}/img`, formData, config)
+        axios.post(`${API_URL}/img`, formData, config).then((response) => {
+          console.log("passe")
+          alert("Image mise en ligne")
+        })
       }
     
       const _handleImageChange = (e) => {

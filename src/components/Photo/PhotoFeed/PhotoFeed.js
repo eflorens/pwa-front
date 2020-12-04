@@ -16,7 +16,10 @@ const PhotoFeed = () => {
         };
 
         const data = await axios.get(`${API_URL}/img/all`, config)
-        setPhotoData(data.data.reverse())
+        if (data.status == 200) {
+            console.log(data)
+            setPhotoData(data.data.reverse())
+        }
     }, []);
     
     
