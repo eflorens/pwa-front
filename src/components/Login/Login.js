@@ -29,7 +29,7 @@ const Login = () => {
             const status = res.status;
             switch (status) {
                 case 200:
-                    history.clear();
+                    //history.clear();
                     history.push("/home");
                     break;
                 default:

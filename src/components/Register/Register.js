@@ -28,7 +28,6 @@ const Register = () => {
                             status: "success"
                         })
                         setTimeout(() => {
-                            history.clear();
                             history.push("/login")
                         }, 3000)
                         break;

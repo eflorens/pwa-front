@@ -7,6 +7,7 @@ const Photo = ({item}) => {
 
     return (
         <Card className="col-sm-12 col-md-8 ml-auto mr-auto mt-4">
+            <Card.Header>{item.postedBy}</Card.Header>
             <Card.Img className="col-sm-12 col-md-8 ml-auto mr-auto mt-4" src={item.imgUrl}/>
 		</Card>
     );

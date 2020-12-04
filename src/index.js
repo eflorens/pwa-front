@@ -27,7 +27,6 @@ ReactDOM.render(
                     <Route exact path="/home" component={Home}/>
                     <Route exact path="/upload" component={UploadPhotoComponant}/>
                     <Route render={(e) => {
-                        console.log(e)
                         if (isAuthenticated()) {
                             if (e.location.pathname === '/upload') {
                                 return <Redirect to="/upload"/>

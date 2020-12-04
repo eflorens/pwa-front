@@ -10,9 +10,6 @@ const getUserPhotosList = async (userId) => {
     };
 
     const data = await axios.get(`${API_URL}/img`, config)
-
-
-    console.log("getUserPhotosList", )
 }
 
 async function getPhotosList() {
@@ -23,7 +20,6 @@ async function getPhotosList() {
 
     const data = await axios.get(`${API_URL}/img`, config)
 
-    console.log(data)
     if (data)
         return (data);
      else
