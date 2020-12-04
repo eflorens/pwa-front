@@ -9,8 +9,8 @@ import AuthProvider from "./contexts/AuthContext";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import Register from "./components/Register/Register";
-import Toolbar from "./components/Toolbar/Toolbar";
 import {Container} from "react-bootstrap";
+import UploadPhotoComponant from './components/Photo/Upload_photo/UploadPhoto'
 
 
 const isAuthenticated = () => {
@@ -20,15 +20,20 @@ const isAuthenticated = () => {
 ReactDOM.render(
     <AuthProvider>
         <BrowserRouter>
-            <Toolbar/>
             <Container>
                 <Switch>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
                     <Route exact path="/home" component={Home}/>
-                    <Route render={() => {
+                    <Route exact path="/upload" component={UploadPhotoComponant}/>
+                    <Route render={(e) => {
+                        console.log(e)
                         if (isAuthenticated()) {
-                            return <Redirect to="/home"/>;
+                            if (e.location.pathname === '/upload') {
+                                return <Redirect to="/upload"/>
+                            } else {
+                                return <Redirect to="/home"/>;
+                            }
                         } else {
                             return <Redirect to="/login"/>;
                         }

@@ -1,15 +1,25 @@
 import React from "react";
 import { useEffect, useState } from 'react';
-import {Modal} from 'react-bootstrap'
+import axios from 'axios'
+
+const API_URL = "https://pwa-back.herokuapp.com";
 
 const UploadPhotoComponant = () => {
     const [file, setFile] = useState("")
     const [imagePreviewUrl, setImagePreviewUrl] = useState('')
     
-      const _handleSubmit = (e) => {
+      const _handleSubmit = async (e) => {
         e.preventDefault();
         // TODO: do something with -> this.state.file
         console.log('handle uploading-', file);
+        const token = localStorage.getItem('token')
+        var formData = new FormData();
+        formData.append("image", file);
+        const config = {
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
+      };
+        const data = await axios.post(`${API_URL}/img`, formData, config)
+        console.log(data)
       }
     
       const _handleImageChange = (e) => {
@@ -35,8 +45,8 @@ const UploadPhotoComponant = () => {
         }
     
         return (
-          <Modal>
-            <div className="previewComponent">
+          
+            <div style={{'margin': '0 auto', width: '50%'}}>
               <form onSubmit={(e)=>_handleSubmit(e)}>
                 <input className="fileInput" 
                   type="file" 
@@ -49,7 +59,6 @@ const UploadPhotoComponant = () => {
                 {$imagePreview}
               </div>
             </div>
-            </Modal>
           );
       };
 

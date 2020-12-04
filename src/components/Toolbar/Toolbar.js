@@ -2,8 +2,12 @@ import React from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../assets/logo.svg'
 import Nav from "react-bootstrap/Nav"
+import {Route} from 'react-router'
+import UploadPhotoComponant from '../Photo/Upload_photo/UploadPhoto'
 
-const toolbar = (props) => (
+const Toolbar = (props) => (
+    <div>
+    <Route exact path="/upload" component={UploadPhotoComponant}/>
     <Navbar bg="light">
         <Navbar.Brand>
             <img
@@ -17,10 +21,11 @@ const toolbar = (props) => (
         </Navbar.Brand>
         <Nav className="mr-auto">
             <Nav.Link href="#home">Profile</Nav.Link>
-            <Nav.Link to="" href="#addPhoto">Add photo</Nav.Link>
+            <Nav.Link to="/upload" href="/upload">Add photo</Nav.Link>
         </Nav>
     </Navbar>
+    </div>
 );
 
 
-export default toolbar;
+export default Toolbar;
