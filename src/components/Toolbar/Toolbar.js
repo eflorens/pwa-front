@@ -4,6 +4,7 @@ import logo from '../../assets/logo.svg'
 import {Nav, Modal, Button} from "react-bootstrap"
 import {Route} from 'react-router'
 import UploadPhotoComponant from '../Photo/Upload_photo/UploadPhoto'
+import Login from '../Login/Login'
 import axios from 'axios'
 
 const API_URL = "https://pwa-back.herokuapp.com";
@@ -52,6 +53,7 @@ const Toolbar = (props) => {
     return (
     <div>
     <Route exact path="/upload" component={UploadPhotoComponant}/>
+    <Route exact path='/login' component={Login}/>
     <Navbar bg="light">
         <Navbar.Brand>
             <img
@@ -69,6 +71,11 @@ const Toolbar = (props) => {
             
                 setIsShow(!isShow)
             }}>Add photo</Nav.Link>
+        </Nav>
+        <Nav className="mr-right">
+            <Nav.Link to='/login' href='/login' onClick={() => {
+                localStorage.removeItem("token");
+            }}>Disonnect</Nav.Link>
         </Nav>
     </Navbar>
     <Modal show={isShow}>
