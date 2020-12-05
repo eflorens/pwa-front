@@ -24,6 +24,7 @@ const Toolbar = (props) => {
       };
         const data = await axios.post(`${API_URL}/img`, formData, config)
         if (data) setIsShow(!isShow)
+        window.location.reload();
       }
     
       const _handleImageChange = (e) => {
